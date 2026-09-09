@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dkinkdxl8nm8x"]
+
+[ext_resource type="Script" uid="uid://cmf77mbcyup40" path="res://uis/main_menu.gd" id="1_vfys4"]
+
+[node name="MainMenu" type="CenterContainer" unique_id=937596666]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -50.5
+offset_right = 35.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vfys4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1505137626]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+
+[node name="ButtonStart" type="Button" parent="VBoxContainer" unique_id=1498011061]
+layout_mode = 2
+text = "Start"
+
+[node name="ButtonSettings" type="Button" parent="VBoxContainer" unique_id=1104803384]
+layout_mode = 2
+text = "Settings"
+
+[node name="ButtonExit" type="Button" parent="VBoxContainer" unique_id=1185662444]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonSettings" to="." method="_on_button_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://87qfgpjhnq67"]
+
+[ext_resource type="PackedScene" uid="uid://b3ruhyrbax2ap" path="res://characters/character.tscn" id="1_oyvke"]
+[ext_resource type="PackedScene" uid="uid://b5bhqc7segjvv" path="res://characters/cat/cat.glb" id="2_jgkb2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_afq4u"]
+animation = &"CharacterArmature|Dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d7mrx"]
+animation = &"CharacterArmature|Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bw7d0"]
+animation = &"CharacterArmature|Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x6vlu"]
+animation = &"CharacterArmature|Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cqa2e"]
+animation = &"CharacterArmature|Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_afq4u"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x6vlu"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bw7d0"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dvpap"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"dancing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atrra"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vfab5"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0d5op"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cqa2e"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"dancing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52q0i"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ww8q4"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cjmcd"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ldng"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l7o8s"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"dancing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d3ki8"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iudnd"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ckbff"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dm4tk"]
+xfade_time = 0.13
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jgkb2"]
+states/Dance/node = SubResource("AnimationNodeAnimation_afq4u")
+states/Dance/position = Vector2(513, -6)
+states/Death/node = SubResource("AnimationNodeAnimation_d7mrx")
+states/Death/position = Vector2(910, -6)
+states/End/position = Vector2(910, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_bw7d0")
+states/Idle/position = Vector2(425, 100)
+states/Jump/node = SubResource("AnimationNodeAnimation_x6vlu")
+states/Jump/position = Vector2(629, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_cqa2e")
+states/Walk/position = Vector2(513, 210)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_afq4u"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_x6vlu"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_bw7d0"), "Idle", "Dance", SubResource("AnimationNodeStateMachineTransition_dvpap"), "Dance", "Idle", SubResource("AnimationNodeStateMachineTransition_atrra"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_vfab5"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_0d5op"), "Walk", "Dance", SubResource("AnimationNodeStateMachineTransition_cqa2e"), "Dance", "Walk", SubResource("AnimationNodeStateMachineTransition_52q0i"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_ww8q4"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_cjmcd"), "Dance", "Jump", SubResource("AnimationNodeStateMachineTransition_0ldng"), "Jump", "Dance", SubResource("AnimationNodeStateMachineTransition_l7o8s"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_d3ki8"), "Dance", "Death", SubResource("AnimationNodeStateMachineTransition_iudnd"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_ckbff"), "Jump", "Death", SubResource("AnimationNodeStateMachineTransition_dm4tk")]
+graph_offset = Vector2(-62.67719, -26.038122)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgkb2"]
+albedo_color = Color(0.5921569, 0.39215687, 0.15294118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1o113"]
+albedo_color = Color(0.4, 0.27058825, 0.101960786, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2c10"]
+albedo_color = Color(0.4, 0.21176471, 0.33333334, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c5j2"]
+albedo_color = Color(0.5019608, 0.5137255, 0.56078434, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqs5p"]
+albedo_color = Color(0.101960786, 0.101960786, 0.11372549, 1)
+
+[node name="CatCharacter" unique_id=1643246455 instance=ExtResource("1_oyvke")]
+
+[node name="AnimationTree" parent="." index="0" unique_id=775854576]
+root_node = NodePath("../Skin")
+tree_root = SubResource("AnimationNodeStateMachine_jgkb2")
+anim_player = NodePath("../Skin/AnimationPlayer")
+parameters/conditions/dancing = false
+parameters/conditions/death = false
+parameters/conditions/idle = false
+parameters/conditions/jumping = false
+parameters/conditions/walking = false
+
+[node name="Skin" parent="." index="3" unique_id=1278249660 instance=ExtResource("2_jgkb2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Skin/RootNode/CharacterArmature" parent_id_path=PackedInt32Array(1278249660, 1149774758) index="0" unique_id=792588758]
+bones/1/position = Vector3(0, 0, 0.0048319353)
+bones/3/rotation = Quaternion(6.15712e-12, 3.546614e-10, -0.019997537, 0.9998001)
+
+[node name="Head3" parent="Skin/RootNode/CharacterArmature/Skeleton3D" index="1" unique_id=2083323221]
+transform = Transform3D(0.99920005, 0.03998707, 7.0893463e-10, 5.476257e-09, -1.1911205e-07, -0.99999994, -0.039987065, 0.9992, -1.1923579e-07, 0, -1.0808237e-09, 0.01389854)
+
+[node name="Cat_Blob" parent="Skin/RootNode/CharacterArmature/Skeleton3D" index="2" unique_id=286119316]
+surface_material_override/0 = SubResource("StandardMaterial3D_jgkb2")
+surface_material_override/1 = SubResource("StandardMaterial3D_1o113")
+surface_material_override/2 = SubResource("StandardMaterial3D_r2c10")
+surface_material_override/3 = SubResource("StandardMaterial3D_5c5j2")
+surface_material_override/4 = SubResource("StandardMaterial3D_rqs5p")
+
+[editable path="Skin"]

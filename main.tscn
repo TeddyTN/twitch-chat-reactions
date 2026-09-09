@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dvweyqntiohlg"]
+
+[ext_resource type="Script" uid="uid://drwswwa62s72" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://c1e6hgr00uamp" path="res://scripts/twitch_client.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dkinkdxl8nm8x" path="res://uis/main_menu.tscn" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://c4367flgp85oi" path="res://characters/character_manager.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b4txg4m1a7157" path="res://uis/settings_menu.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://5yx17ur2tb0l" path="res://characters/chicken/chicken_character.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ciwi8o7hy7oai" path="res://characters/pigeon/pigeon_character.tscn" id="4_kek77"]
+[ext_resource type="Script" uid="uid://cec6tnv17qs6w" path="res://scripts/character_list.gd" id="5_4c57u"]
+[ext_resource type="PackedScene" uid="uid://87qfgpjhnq67" path="res://characters/cat/cat_character.tscn" id="6_272bh"]
+
+[sub_resource type="Resource" id="Resource_wf2pk"]
+script = ExtResource("5_4c57u")
+characters = Dictionary[String, PackedScene]({
+"cat": ExtResource("6_272bh"),
+"chicken": ExtResource("3_h2yge"),
+"pigeon": ExtResource("4_kek77")
+})
+metadata/_custom_type_script = "uid://cec6tnv17qs6w"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkbgo"]
+size = Vector3(100, 0.1, 100)
+
+[node name="Main" type="Node" unique_id=39667618]
+script = ExtResource("1_1bvp3")
+character_list = SubResource("Resource_wf2pk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=917844815]
+
+[node name="DebugButtons" type="HBoxContainer" parent="CanvasLayer" unique_id=1328831956]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonDebugSpawnCharacter" type="Button" parent="CanvasLayer/DebugButtons" unique_id=336997638]
+layout_mode = 2
+text = "Spawn character"
+
+[node name="ButtonDebugCharactersJumping" type="Button" parent="CanvasLayer/DebugButtons" unique_id=1947694015]
+layout_mode = 2
+text = "Characters jumping"
+
+[node name="ButtonDebugKillCharacters" type="Button" parent="CanvasLayer/DebugButtons" unique_id=2116158855]
+layout_mode = 2
+text = "Kill characters"
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=937596666 instance=ExtResource("2_7mycd")]
+
+[node name="SettingsMenu" parent="CanvasLayer" unique_id=1165662958 instance=ExtResource("2_lquwl")]
+
+[node name="TwitchClient" type="Node" parent="." unique_id=2136173534]
+script = ExtResource("1_ig7tw")
+ignore_users = Array[String](["streamelements", "soundalerts"])
+metadata/_custom_type_script = "uid://c1e6hgr00uamp"
+
+[node name="World" type="Node3D" parent="." unique_id=1174710343]
+
+[node name="Camera3D" type="Camera3D" parent="World" unique_id=215745643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+projection = 1
+size = 6.0
+
+[node name="CharacterManager" type="Node3D" parent="World" unique_id=1989546429 node_paths=PackedStringArray("twitch", "spawn_point_left", "spawn_point_right", "button_debug_characters_jumping", "button_debug_kill_characters", "button_debug_spawn_character")]
+script = ExtResource("2_h2yge")
+twitch = NodePath("../../TwitchClient")
+spawn_point_left = NodePath("../SpawnLeft")
+spawn_point_right = NodePath("../SpawnRight")
+button_debug_characters_jumping = NodePath("../../CanvasLayer/DebugButtons/ButtonDebugCharactersJumping")
+button_debug_kill_characters = NodePath("../../CanvasLayer/DebugButtons/ButtonDebugKillCharacters")
+button_debug_spawn_character = NodePath("../../CanvasLayer/DebugButtons/ButtonDebugSpawnCharacter")
+metadata/_custom_type_script = "uid://c4367flgp85oi"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=1352584273]
+transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261824, 0, -0.42261824, 0.9063077, 0, -10, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="World" unique_id=2477429]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=1790178975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_vkbgo")
+
+[node name="SpawnLeft" type="Marker3D" parent="World" unique_id=431074882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="SpawnRight" type="Marker3D" parent="World" unique_id=438809112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -40)
+
+[connection signal="exit_pressed" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_exit_pressed"]
+[connection signal="settings_pressed" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_settings_pressed"]
+[connection signal="start_pressed" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_start_pressed"]
+[connection signal="close_pressed" from="CanvasLayer/SettingsMenu" to="." method="_on_settings_menu_close_pressed"]

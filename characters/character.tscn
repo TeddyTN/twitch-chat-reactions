@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://b3ruhyrbax2ap"]
+
+[ext_resource type="Script" uid="uid://gfjgo07mbfd4" path="res://characters/character.gd" id="1_jfi6v"]
+[ext_resource type="Script" uid="uid://5un4qw8ivxhn" path="res://scripts/state_machine.gd" id="1_ke030"]
+[ext_resource type="Script" uid="uid://b2y0npyvgdcht" path="res://characters/states/character_state_animation.gd" id="2_jfi6v"]
+[ext_resource type="Script" uid="uid://d10oqggd25ngt" path="res://characters/states/charackter_state_death.gd" id="3_f0775"]
+[ext_resource type="Script" uid="uid://c1vffy54lcqpt" path="res://characters/states/character_state_falling.gd" id="4_vliyq"]
+[ext_resource type="Script" uid="uid://dnq2fule5uhua" path="res://characters/states/character_state_idle.gd" id="5_qulg7"]
+[ext_resource type="Script" uid="uid://coujolyd1nvc3" path="res://characters/states/character_state_walking.gd" id="6_4kffy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vkbgo"]
+
+[node name="Character" type="CharacterBody3D" unique_id=1643246455 node_paths=PackedStringArray("state_dancing", "state_death", "state_idle", "state_jumping", "state_walking")]
+collision_layer = 2
+script = ExtResource("1_jfi6v")
+state_dancing = NodePath("StateMachine/CharacterStateDancing")
+state_death = NodePath("StateMachine/CharacterStateDeath")
+state_idle = NodePath("StateMachine/CharacterStateIdle")
+state_jumping = NodePath("StateMachine/CharacterStateJumping")
+state_walking = NodePath("StateMachine/CharacterStateWalking")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=775854576]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=204366745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_vkbgo")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1324467282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "Username"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1671593439 node_paths=PackedStringArray("state_default")]
+script = ExtResource("1_ke030")
+state_default = NodePath("CharacterStateFalling")
+metadata/_custom_type_script = "uid://5un4qw8ivxhn"
+
+[node name="CharacterStateDancing" type="Node" parent="StateMachine" unique_id=1511574576 node_paths=PackedStringArray("state_idle", "animation_tree")]
+script = ExtResource("2_jfi6v")
+state_idle = NodePath("../CharacterStateIdle")
+timer_range = Vector2(1.5, 3)
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://b2y0npyvgdcht"
+
+[node name="CharacterStateDeath" type="Node" parent="StateMachine" unique_id=987261237 node_paths=PackedStringArray("root", "animation_tree")]
+script = ExtResource("3_f0775")
+root = NodePath("../..")
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://d10oqggd25ngt"
+
+[node name="CharacterStateFalling" type="Node" parent="StateMachine" unique_id=1726805068 node_paths=PackedStringArray("character_body_3d", "state_idle", "animation_tree")]
+script = ExtResource("4_vliyq")
+character_body_3d = NodePath("../..")
+state_idle = NodePath("../CharacterStateIdle")
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://c1vffy54lcqpt"
+
+[node name="CharacterStateIdle" type="Node" parent="StateMachine" unique_id=881120050 node_paths=PackedStringArray("character_body_3d", "state_death", "state_falling", "state_walking", "animation_tree")]
+script = ExtResource("5_qulg7")
+character_body_3d = NodePath("../..")
+state_death = NodePath("../CharacterStateDeath")
+state_falling = NodePath("../CharacterStateFalling")
+state_walking = NodePath("../CharacterStateWalking")
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://dnq2fule5uhua"
+
+[node name="CharacterStateJumping" type="Node" parent="StateMachine" unique_id=1059542013 node_paths=PackedStringArray("state_idle", "animation_tree")]
+script = ExtResource("2_jfi6v")
+animation = 1
+state_idle = NodePath("../CharacterStateIdle")
+timer_range = Vector2(1, 2)
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://b2y0npyvgdcht"
+
+[node name="CharacterStateWalking" type="Node" parent="StateMachine" unique_id=1908571071 node_paths=PackedStringArray("character_body_3d", "state_idle", "animation_tree")]
+script = ExtResource("6_4kffy")
+character_body_3d = NodePath("../..")
+state_idle = NodePath("../CharacterStateIdle")
+animation_tree = NodePath("../../AnimationTree")
+metadata/_custom_type_script = "uid://coujolyd1nvc3"

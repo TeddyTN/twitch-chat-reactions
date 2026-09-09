@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://b4txg4m1a7157"]
+
+[ext_resource type="Script" uid="uid://dxt72eygt75d2" path="res://uis/settings_menu.gd" id="1_7tu4r"]
+
+[node name="SettingsMenu" type="PanelContainer" unique_id=1165662958]
+custom_minimum_size = Vector2(640, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -68.0
+offset_right = 96.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7tu4r")
+
+[node name="Panel" type="Panel" parent="." unique_id=441110814]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1985766779]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1894523095]
+layout_mode = 2
+text = "Settings"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1727684868]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1161275049]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer" unique_id=1812833263]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="ChannelLabel" type="Label" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=775588067]
+layout_mode = 2
+text = "Channel"
+
+[node name="ChannelTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=840260061]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Channel name"
+
+[node name="UserTimeoutLabel" type="Label" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=654123991]
+layout_mode = 2
+text = "User timeout"
+
+[node name="UserTimeoutSpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=1909935139]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+
+[node name="UserColorLabel" type="Label" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=1789527885]
+layout_mode = 2
+text = "User color"
+
+[node name="UserColorCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=1198852100]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DisplayScaleLabel" type="Label" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=1580257055]
+layout_mode = 2
+text = "Display scale"
+
+[node name="DisplayScaleSpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer/GridContainer" unique_id=1897397463]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+step = 5.0
+suffix = "%"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer" unique_id=635697238]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=465539547]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1110602702]
+layout_mode = 2
+text = "Characters"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=339178493]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CharacterContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer" unique_id=146632987]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=405475870]
+layout_mode = 2
+
+[node name="ButtonClose" type="Button" parent="VBoxContainer" unique_id=1502780912]
+layout_mode = 2
+text = "Close"
+
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/GridContainer/ChannelTextEdit" to="." method="_on_channel_text_edit_text_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/GridContainer/UserTimeoutSpinBox" to="." method="_on_user_timeout_spin_box_value_changed"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/GridContainer/UserColorCheckButton" to="." method="_on_user_color_check_button_toggled"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/GridContainer/DisplayScaleSpinBox" to="." method="_on_display_scale_spin_box_value_changed"]
+[connection signal="pressed" from="VBoxContainer/ButtonClose" to="." method="_on_button_close_pressed"]
