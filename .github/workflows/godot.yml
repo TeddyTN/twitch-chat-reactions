@@ -25,7 +25,7 @@ jobs:
   Release-Windows-Desktop-x86_64:
     needs: Build-Exporter
     permissions:
-      contents: read
+      contents: write
       packages: read
     runs-on: ubuntu-latest
     steps:
@@ -38,9 +38,6 @@ jobs:
       - run: >
           docker run --rm -v "${{ github.workspace }}:/project" -w /project "ghcr.io/teddytn/godot:4.7.2"
           godot --headless --export-release "Windows Desktop" ./exports/Twitch-Chat-Reactions.exe
-      - uses: actions/upload-artifact@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: softprops/action-gh-release@v3
         with:
-          name: Release-Windows-Desktop-x86_64
-          path: ./exports/Twitch-Chat-Reactions.exe
+          files: ./exports/Twitch-Chat-Reactions.exe
