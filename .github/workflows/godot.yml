@@ -21,7 +21,7 @@ jobs:
           context: ./docs/docker
           file: ./docs/docker/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/godot:4.7.2
+          tags: ghcr.io/${{ lowercase(github.repository_owner) }}/godot:4.7.2
   Release-Windows-Desktop-x86_64:
     needs: Build-Exporter
     permissions:
@@ -36,7 +36,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: >
-          docker run --rm -v "${{ github.workspace }}:/project" -w /project "ghcr.io/${{ github.repository_owner }}/godot:4.7.2"
+          docker run --rm -v "${{ github.workspace }}:/project" -w /project "ghcr.io/${{ lowercase(github.repository_owner) }}/godot:4.7.2"
           godot --headless --export-release "Windows Desktop" ./exports/Twitch-Chat-Reactions.exe
       - uses: actions/upload-artifact@v4
         env:
